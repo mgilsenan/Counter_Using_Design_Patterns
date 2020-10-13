@@ -2,7 +2,11 @@ import java.io.*;
 import java.util.List;
 
 public class wcOO {
-    public static void clientSetCount( ICounter counterType, int count ) { counterType.Count(count);}
+    private static boolean verboseEnabled;
+
+    public static void clientSetCount(ICounter counterType, int count) {
+        counterType.Count(count);
+    }
 
     public static void main(String args[]) throws IOException {
         IBanner testBanner = new Banner(
@@ -23,15 +27,14 @@ public class wcOO {
             return;
         }
 
+        if(admin.verboseIsEnabled()){
+            verboseEnabled = true;
+        }
+
         List<String>  arguments = admin.getSrcFilename();
         for (String srcFile : arguments) {
             countFile(srcFile);
-            // if (admin.verboseIsEnabled()) {
-            //     System.out.println("*****");
-            // }
-        }
-
-        
+        }  
         
     }
 
@@ -49,29 +52,40 @@ public class wcOO {
             LineCount lineCount = new LineCount();
            
             while((line = reader.readLine()) != null) {
-                        
-                        //lineCount.setCount(1);
+                    
                         clientSetCount(lineCount, 1);
+                        if(verboseEnabled){ printVerbose('l', 1);}
 
                         if(!line.equals(""))
                         {
-                        
-                            //charCount.setCount(line.length());
                             clientSetCount(charCount, line.length());
+                            if(verboseEnabled){ printVerbose('c', line.length());}
                           
                             String[] wordList = line.split("\\s+");
  
-                            //wordCount.setCount(wordList.length);
                             clientSetCount(wordCount, wordList.length);
+                            if(verboseEnabled){ printVerbose('w', wordList.length);}
                         }
 
             }
             file.close();
-            System.out.println("lines " +  lineCount.getCount() + ", words " + wordCount.getCount() + ", chars " + charCount.getCount());
+
+            printCounts(wordCount, charCount, lineCount);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void printVerbose(char character, int count) {
+        for(int i = 0; i < count; i++){
+            System.out.print(character);
+        }
+        System.out.println();
+    }
+
+    private static void printCounts(WordCount wordCount, CharCount charCount, LineCount lineCount) {
+        System.out.println("lines " +  lineCount.getCount() + ", words " + wordCount.getCount() + ", chars " + charCount.getCount());
     }
 }
 

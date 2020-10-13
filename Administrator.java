@@ -23,17 +23,32 @@ public class Administrator implements IAdministrator {
 
         for (int n = 0; n < args.length; ++n) {
             if (args[n] != null) {
-                if(args[0].contains("-")){
-                    setOptions(args[0]);
+                if(optionsEnabled(args[n])){
+                    setOptions(args[n]);
+                } else if(argsIsFile(args[n])){
+                    srcFilename.add(args[n]);
+                } else{
+                    unsuccessfulAttempt();
                 }
-
-
-                srcFilename.add(args[n]);
             }
         }
     }
 
-    public void unsuccessfulAttempt(){
+    private boolean argsIsFile(String string) {
+        if(string.contains(".txt")){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean optionsEnabled(String string) {
+        if(string.contains("-")){
+            return true;
+        }
+        return false;
+    }
+
+    public void unsuccessfulAttempt() {
         System.out.println("Unsuccessful attempt, use the following options in the command line..." );
         System.out.println("HelpOption = \"-h\" | \"-help\"\n" +
                 "VerboseOption = \"-v\" | \"-verbose\"\n" +
@@ -52,10 +67,10 @@ public class Administrator implements IAdministrator {
             isBannerEnabled = true;
         }
 
-        // if(args.equals(verbose.getLongVersion())||args.equals(verbose.getShortVersion())){
+        if(args.equals(verbose.getLongVersion())||args.equals(verbose.getShortVersion())){
            
-        //     isVerboseEnabled = true;
-        // }
+            isVerboseEnabled = true;
+        }
     }
 
     @Override
