@@ -1,7 +1,7 @@
-public class LineCount extends Counter {
+public class LineCounterTemplate extends CounterTemplate {
     private int lineCount;
 
-    public LineCount(){
+    public LineCounterTemplate(){
         
     }
 

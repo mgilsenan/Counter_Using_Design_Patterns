@@ -1,7 +1,7 @@
-public class CharCount extends Counter {
+public class CharCounterTemplate extends CounterTemplate {
     private int charCount;
 
-    public CharCount(){
+    public CharCounterTemplate(){
         
     }
 

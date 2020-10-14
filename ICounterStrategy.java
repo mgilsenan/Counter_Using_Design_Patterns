@@ -1,3 +1,3 @@
-public interface ICounter {
+public interface ICounterStrategy {
     public void Count(int count);
 }

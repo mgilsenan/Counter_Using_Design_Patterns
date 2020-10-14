@@ -1,7 +1,7 @@
-public class WordCount extends Counter {
+public class WordCounterTemplate extends CounterTemplate {
     private int wordCount;
 
-    public WordCount(){
+    public WordCounterTemplate(){
         
     }
 

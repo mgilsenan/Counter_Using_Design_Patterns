@@ -4,7 +4,7 @@ import java.util.List;
 public class wcOO {
     private static boolean verboseEnabled;
 
-    public static void clientSetCount(ICounter counterType, int count) {
+    public static void clientSetCount(ICounterStrategy counterType, int count) {
         counterType.Count(count);
     }
 
@@ -47,9 +47,9 @@ public class wcOO {
             BufferedReader reader = file.getBufferedReader();
             String line;
 
-            WordCount wordCount = new WordCount();
-            CharCount charCount = new CharCount();
-            LineCount lineCount = new LineCount();
+            WordCounterTemplate wordCount = new WordCounterTemplate();
+            CharCounterTemplate charCount = new CharCounterTemplate();
+            LineCounterTemplate lineCount = new LineCounterTemplate();
            
             while((line = reader.readLine()) != null) {
                     
@@ -84,7 +84,7 @@ public class wcOO {
         System.out.println();
     }
 
-    private static void printCounts(WordCount wordCount, CharCount charCount, LineCount lineCount) {
+    private static void printCounts(WordCounterTemplate wordCount, CharCounterTemplate charCount, LineCounterTemplate lineCount) {
         System.out.println("lines " +  lineCount.getCount() + ", words " + wordCount.getCount() + ", chars " + charCount.getCount());
     }
 }
