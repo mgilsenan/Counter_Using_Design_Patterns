@@ -1,4 +1,4 @@
-# Counter_Using_Design_Patterns
+# Counter Using Design Patterns #
 
 ## Design Patterns Integration and Explanation ##
 
