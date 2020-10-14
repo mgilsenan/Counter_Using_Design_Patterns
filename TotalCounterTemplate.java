@@ -1,3 +1,5 @@
+//package TemplateStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,6 @@ public class TotalCounterTemplate extends CounterTemplate {
 		return counterTemplates;
 	}
 
-
 	public TotalCounterTemplate() {
 		counterTemplates = new ArrayList<CounterTemplate>();
         WordCounterTemplate wordCount = new WordCounterTemplate();
@@ -20,13 +21,11 @@ public class TotalCounterTemplate extends CounterTemplate {
 		counterTemplates.add(lineCount);
 	}
 	
-	
 	@Override
 	public void setCount(int count) {
 			
 	}
 
-	
 	@Override
 	public int getCount() {
 	

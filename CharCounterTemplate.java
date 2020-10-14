@@ -5,7 +5,6 @@ public class CharCounterTemplate extends CounterTemplate {
         
     }
 
-
     @Override
     public int getCount() {
         return charCount;

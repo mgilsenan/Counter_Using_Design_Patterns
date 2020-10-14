@@ -4,7 +4,6 @@ public class LineCounterTemplate extends CounterTemplate {
     public LineCounterTemplate(){
         
     }
-
     
     @Override
     public int getCount() {

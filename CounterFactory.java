@@ -1,3 +1,6 @@
+//package Factory;
+//import TemplateStrategy.*;
+//import Composite.*;
 
 public class CounterFactory implements IFactory {
 
