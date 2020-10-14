@@ -1,4 +1,4 @@
-abstract class CounterTemplate implements ICounterStrategy{
+abstract class CounterTemplate implements ICounterStrategy {
     public void Count(int count){
         setCount(count);
     }
