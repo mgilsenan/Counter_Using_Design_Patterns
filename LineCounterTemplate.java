@@ -14,7 +14,5 @@ public class LineCounterTemplate extends CounterTemplate {
     @Override
     public void setCount(int count) {
         lineCount += count;
-
     }
-    
 }
