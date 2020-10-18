@@ -60,7 +60,7 @@ public class wcOO {
         }  
 
         //printing total count of all src files
-        System.out.print("\n"+"Total lines " +  totalLineCounter.getCount() + ", Total words " + totalWordCounter.getCount() + ", Total chars " + totoalCharCounter.getCount()+"\n");
+        System.out.print("Total lines " +  totalLineCounter.getCount() + ", Total words " + totalWordCounter.getCount() + ", Total chars " + totoalCharCounter.getCount()+"\n");
         
     }
     
