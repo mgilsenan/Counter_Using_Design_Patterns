@@ -77,7 +77,7 @@ public class Administrator implements IAdministrator {
 
     @Override
     public void usage() {
-        System.out.println("Usage: <class_name> <src> {...<src>}");
+        System.out.println("Usage: wcOO <src> {...<src>}");
 
     }
 

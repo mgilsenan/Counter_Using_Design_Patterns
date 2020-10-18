@@ -11,6 +11,11 @@ public class wcOO {
     private static boolean verboseEnabled;
     private static List<CounterTemplate> compositeCounters;
     private static CounterTemplate counter;
+    private static CounterTemplate totalCounter;
+    private static List<CounterTemplate> compositeTotalCounters;
+    private static CounterTemplate totalLineCounter;
+    private static CounterTemplate totoalCharCounter;
+    private static CounterTemplate totalWordCounter;
     
     public static void clientSetCount(ICounterStrategy counterType, int count) {
         counterType.Count(count);
@@ -37,20 +42,33 @@ public class wcOO {
         if(admin.verboseIsEnabled()){
             verboseEnabled = true;
         }
+
+        // Using Factory Design Pattern to create an instance of a Counter Template:
+        CounterFactory totalCounterFactory = new CounterFactory(); 
+        totalCounter = totalCounterFactory.createCounter();
+
+        // Using the Composite Design Pattern to get a Counter that is composed of Char, Line, Word Counters.
+        compositeTotalCounters = ((TotalCounterTemplate)totalCounter).getCounterTemplates();
+
+        totalLineCounter = compositeTotalCounters.get(2);
+        totoalCharCounter = compositeTotalCounters.get(1);
+        totalWordCounter = compositeTotalCounters.get(0);
         
         List<String>  arguments = admin.getSrcFilename();
         for (String srcFile : arguments) {
             countFile(srcFile);
         }  
+
+        //printing total count of all src files
+        System.out.print("\n"+"Total lines " +  totalLineCounter.getCount() + ", Total words " + totalWordCounter.getCount() + ", Total chars " + totoalCharCounter.getCount()+"\n");
         
     }
     
     private static void countFile(String srcFile) {
-        // Using Factory Design Pattern to create an instance of a Counter Template:
         CounterFactory factory = new CounterFactory(); 
+
         counter = factory.createCounter();
 
-        // Using the Composite Design Pattern to get a Counter that is composed of Char, Line, Word Counters.
         compositeCounters = ((TotalCounterTemplate)counter).getCounterTemplates();
 
         IFileCheck file = new FileCheck(srcFile, new File(srcFile));
@@ -69,6 +87,7 @@ public class wcOO {
             while((line = reader.readLine()) != null) {
                     
                         clientSetCount(lineCounter, 1);
+                        clientSetCount(totalLineCounter, 1);
                         if(verboseEnabled){ printVerbose('l', 1);}
 
                         if(!line.equals(""))
@@ -76,8 +95,10 @@ public class wcOO {
                             String[] wordList = line.split("\\s+");
 
                             clientSetCount(charCounter, line.length());
+                            clientSetCount(totoalCharCounter, line.length());
  
                             clientSetCount(wordCounter, wordList.length);
+                            clientSetCount(totalWordCounter, wordList.length);
 
                             if(verboseEnabled){
                                 for (String word : wordList) {
@@ -90,7 +111,7 @@ public class wcOO {
             }
             file.close();
 
-            System.out.println("lines " +  compositeCounters.get(2).getCount() + ", words " + compositeCounters.get(0).getCount() + ", chars " + compositeCounters.get(1).getCount());
+            System.out.print("\n"+"lines " +  lineCounter.getCount() + ", words " + wordCounter.getCount() + ", chars " + charCounter.getCount()+"\n");
 
              
         } catch (Exception e) {
@@ -102,7 +123,6 @@ public class wcOO {
         for(int i = 0; i < count; i++){
             System.out.print(character);
         }
-        System.out.println();
     }
   
 }
